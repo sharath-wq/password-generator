@@ -19,7 +19,7 @@ const Navbar = () => {
                 <DropdownMenuTrigger>
                     <Avatar>
                         <AvatarImage src='#' alt='@shadcn' />
-                        <AvatarFallback className='bg-primary'>S</AvatarFallback>
+                        <AvatarFallback className='bg-primary text-white font-medium'>S</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
