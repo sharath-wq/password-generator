@@ -6,9 +6,11 @@ import Options from './options';
 import { Button } from '@/components/ui/button';
 import { generateRandomPassword } from '@/lib/generte-password';
 import { toast } from '@/components/ui/use-toast';
+import AuthModel from '../models/auth-model';
 
 const Main = () => {
     const [length, setLength] = useState<number>(12);
+    const [user, setUser] = useState(null);
     const [checkboxStates, setCheckboxStates] = useState<{ [key: string]: boolean }>({
         uppercase: true,
         lowercase: true,
@@ -95,7 +97,7 @@ const Main = () => {
                 />
 
                 {/* Button */}
-                <Button className='w-full rounded-full'>Save password</Button>
+                {user ? <Button className='w-full rounded-full'>Save password</Button> : <AuthModel />}
             </div>
         </div>
     );
