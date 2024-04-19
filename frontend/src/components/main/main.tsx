@@ -72,8 +72,8 @@ const Main = () => {
     };
 
     return (
-        <div className='w-full h-full flex justify-center items-center bg-blue-300'>
-            <div className='sm:w-[50%] w-[80%] h-full flex flex-col items-center justify-center gap-5 '>
+        <div className='w-full h-full flex justify-center items-center bg-secondary'>
+            <div className='sm:w-[50%] w-[80%] h-full flex flex-col items-center justify-center gap-5'>
                 {/* Heading */}
                 <Heading />
 

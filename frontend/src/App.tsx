@@ -3,13 +3,17 @@ import Main from '@/components/main/main';
 
 import { Toaster } from '@/components/ui/toaster';
 
+import { ThemeProvider } from '@/components/theme-provider';
+
 function App() {
     return (
-        <main className='flex flex-col w-full h-screen bg-green-200'>
-            <Navbar />
-            <Main />
-            <Toaster />
-        </main>
+        <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+            <main className='flex flex-col w-full h-screen'>
+                <Navbar />
+                <Main />
+                <Toaster />
+            </main>
+        </ThemeProvider>
     );
 }
 

@@ -20,14 +20,14 @@ const Input = ({ copyToClipboard, password, setPassword, handleGenerate }: Input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     type='text'
-                    className='flex-1 outline-none text-xl sm:text-2xl font-bold'
+                    className='flex-1 outline-none text-xl sm:text-2xl font-bold dark:text-black'
                 />
                 <div className='flex'>
                     <Button onClick={copyToClipboard} size={'icon'} variant={'ghost'}>
-                        <Copy />
+                        <Copy className='dark:text-black' />
                     </Button>
                     <Button onClick={handleGenerate} size={'icon'} variant={'ghost'}>
-                        <RefreshCcw />
+                        <RefreshCcw className='dark:text-black' />
                     </Button>
                 </div>
             </div>

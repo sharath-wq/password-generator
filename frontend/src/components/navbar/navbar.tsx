@@ -8,15 +8,18 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LogOut } from 'lucide-react';
+import { ModeToggle } from '@/components/mode-toggle';
 
 const Navbar = () => {
     return (
-        <div className='flex justify-end p-4'>
+        <div className='flex justify-end p-4 border-b shadow-2xl gap-3'>
+            <ModeToggle />
+
             <DropdownMenu>
                 <DropdownMenuTrigger>
                     <Avatar>
                         <AvatarImage src='#' alt='@shadcn' />
-                        <AvatarFallback>S</AvatarFallback>
+                        <AvatarFallback className='bg-primary'>S</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
