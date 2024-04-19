@@ -23,11 +23,21 @@ const Input = ({ copyToClipboard, password, setPassword, handleGenerate }: Input
                     className='flex-1 outline-none text-xl sm:text-2xl font-bold dark:text-black'
                 />
                 <div className='flex'>
-                    <Button onClick={copyToClipboard} size={'icon'} variant={'ghost'}>
-                        <Copy className='dark:text-black' />
+                    <Button
+                        onClick={copyToClipboard}
+                        size={'icon'}
+                        variant={'secondary'}
+                        className='bg-transparent hover:bg-transparent dark:text-black'
+                    >
+                        <Copy />
                     </Button>
-                    <Button onClick={handleGenerate} size={'icon'} variant={'ghost'}>
-                        <RefreshCcw className='dark:text-black' />
+                    <Button
+                        onClick={handleGenerate}
+                        size={'icon'}
+                        variant={'secondary'}
+                        className='bg-transparent hover:bg-transparent dark:text-black'
+                    >
+                        <RefreshCcw />
                     </Button>
                 </div>
             </div>
