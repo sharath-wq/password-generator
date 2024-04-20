@@ -8,6 +8,9 @@ import { TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import axios from 'axios';
+import { BASE_URL } from '@/constants';
+import { toast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -23,9 +26,26 @@ const SignIn = () => {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const response = await axios.post(`${BASE_URL}/users/signin`, values);
+
+            console.log(response);
+            // TODO: otp verification
+
+            toast({
+                description: 'Login successful',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'Uh oh! Something went wrong.',
+                description: 'There was a problem with your request.' + error,
+            });
+        }
     }
+
+    const { isSubmitting, isValid } = form.formState;
 
     return (
         <TabsContent value='signin'>
@@ -61,7 +81,9 @@ const SignIn = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button type='submit'>Submit</Button>
+                            <Button disabled={!isValid || isSubmitting} type='submit'>
+                                Submit
+                            </Button>
                         </form>
                     </Form>
                 </CardContent>

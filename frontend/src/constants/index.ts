@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 interface Option {
     label: string;
     value: string;
@@ -22,4 +24,9 @@ const options: Option[] = [
     },
 ];
 
-export { options };
+const BASE_URL = 'http://localhost:3000/api';
+
+const axiosJWT = axios.create();
+axiosJWT.defaults.withCredentials = true;
+
+export { options, BASE_URL, axiosJWT };

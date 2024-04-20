@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { generateRandomPassword } from '@/lib/generte-password';
 import { toast } from '@/components/ui/use-toast';
 import AuthModel from '../models/auth-model';
+import axios from 'axios';
+import { BASE_URL, axiosJWT } from '@/constants';
 
 const Main = () => {
     const [length, setLength] = useState<number>(12);
@@ -73,6 +75,17 @@ const Main = () => {
         }
     };
 
+    axios.defaults.withCredentials = true;
+
+    const fetchuser = async () => {
+        try {
+            const { data } = await axiosJWT.get(`${BASE_URL}/users/currentuser`);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className='w-full h-full flex justify-center items-center bg-secondary'>
             <div className='sm:w-[50%] w-[80%] h-full flex flex-col items-center justify-center gap-5'>
@@ -98,6 +111,8 @@ const Main = () => {
 
                 {/* Button */}
                 {user ? <Button className='w-full rounded-full'>Save password</Button> : <AuthModel />}
+
+                <Button onClick={fetchuser}>fetch users</Button>
             </div>
         </div>
     );

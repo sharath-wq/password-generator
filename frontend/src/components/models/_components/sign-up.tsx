@@ -2,12 +2,16 @@ import { z } from 'zod';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+
+import { toast } from '@/components/ui/use-toast';
+import { BASE_URL } from '@/constants';
 
 const formSchema = z
     .object({
@@ -32,9 +36,27 @@ const SignUp = () => {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const response = await axios.post(`${BASE_URL}/users/signup`, values);
+
+            console.log(response);
+            // TODO: otp verification
+
+            toast({
+                description: 'Account created.',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'Uh oh! Something went wrong.',
+                description: 'There was a problem with your request.' + error,
+            });
+        }
     }
+
+    const { isSubmitting, isValid } = form.formState;
+
     return (
         <TabsContent value='signup'>
             <Card>
@@ -93,7 +115,9 @@ const SignUp = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button type='submit'>Submit</Button>
+                            <Button disabled={!isValid || isSubmitting} type='submit'>
+                                Submit
+                            </Button>
                         </form>
                     </Form>
                 </CardContent>
