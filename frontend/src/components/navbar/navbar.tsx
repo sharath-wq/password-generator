@@ -14,6 +14,7 @@ import { toast } from '../ui/use-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '@/redux/userSlice';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Navbar = () => {
                         <Avatar>
                             <AvatarImage src='#' alt='@shadcn' />
                             <AvatarFallback className='bg-primary text-white font-medium'>
-                                {user.displayName[0]}
+                                {user?.displayName[0]}
                             </AvatarFallback>
                         </Avatar>
                     )}
@@ -55,7 +56,9 @@ const Navbar = () => {
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Saved Passwords</DropdownMenuItem>
+                    <Link to={'/saved'}>
+                        <DropdownMenuItem>Saved Passwords</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
                         <LogOut className='mr-2 h-4 w-4' />
