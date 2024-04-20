@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { app } from '../../app';
-import { getCookies } from '../../utils/get-cookies';
+import { app } from '../../../app';
+import { getCookies } from '../../../utils/get-cookies';
 
 it('responds with details about the current user', async () => {
     const cookie = await getCookies();

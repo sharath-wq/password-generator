@@ -11,6 +11,8 @@ import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { BASE_URL } from '@/constants';
 import { toast } from '@/components/ui/use-toast';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/redux/userSlice';
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -18,6 +20,8 @@ const formSchema = z.object({
 });
 
 const SignIn = () => {
+    const dispatch = useDispatch();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -28,10 +32,9 @@ const SignIn = () => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const response = await axios.post(`${BASE_URL}/users/signin`, values);
+            const { data } = await axios.post(`${BASE_URL}/users/signin`, values);
 
-            console.log(response);
-            // TODO: otp verification
+            dispatch(setUser(data));
 
             toast({
                 description: 'Login successful',

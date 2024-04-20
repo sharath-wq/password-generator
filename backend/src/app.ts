@@ -4,10 +4,10 @@ import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
 
-import { currentuserRouter } from './routes/current-user';
-import { signinRouter } from './routes/sign-in';
-import { signoutRouter } from './routes/sign-out';
-import { signupRouter } from './routes/sign-up';
+import { currentuserRouter } from './routes/auth/current-user';
+import { signinRouter } from './routes/auth/sign-in';
+import { signoutRouter } from './routes/auth/sign-out';
+import { signupRouter } from './routes/auth/sign-up';
 import { NotFoundError } from './errors/not-found-error';
 import { errorHandler } from './middleware/error-handler';
 

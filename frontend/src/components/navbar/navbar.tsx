@@ -9,19 +9,25 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { LogOut } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle';
-import { BASE_URL, axiosJWT } from '@/constants';
+import { BASE_URL } from '@/constants';
 import { toast } from '../ui/use-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '@/redux/userSlice';
+import axios from 'axios';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+
+    const user = useSelector((state: any) => state.user);
     const handleLogOut = async () => {
         try {
-            const response = await axiosJWT.post(`${BASE_URL}/users/signout`);
-
-            console.log(response);
+            await axios.post(`${BASE_URL}/users/signout`);
 
             toast({
                 description: 'Logged out.',
             });
+
+            dispatch(clearUser());
         } catch (error) {
             toast({
                 variant: 'destructive',
@@ -37,10 +43,14 @@ const Navbar = () => {
 
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Avatar>
-                        <AvatarImage src='#' alt='@shadcn' />
-                        <AvatarFallback className='bg-primary text-white font-medium'>S</AvatarFallback>
-                    </Avatar>
+                    {user && (
+                        <Avatar>
+                            <AvatarImage src='#' alt='@shadcn' />
+                            <AvatarFallback className='bg-primary text-white font-medium'>
+                                {user.displayName[0]}
+                            </AvatarFallback>
+                        </Avatar>
+                    )}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>

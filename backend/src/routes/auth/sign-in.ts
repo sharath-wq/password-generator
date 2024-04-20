@@ -3,10 +3,10 @@ import { body } from 'express-validator';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { Password } from '../services/password';
-import { User } from '../model/user';
-import { validateRequest } from '../middleware/validate-request';
-import { BadRequestError } from '../errors/bad-request-error';
+import { Password } from '../../services/password';
+import { User } from '../../model/user';
+import { validateRequest } from '../../middleware/validate-request';
+import { BadRequestError } from '../../errors/bad-request-error';
 
 const router = express.Router();
 
@@ -34,6 +34,7 @@ router.post(
         const userJwt = jwt.sign(
             {
                 id: existingUser._id,
+                displayNaem: existingUser.displayName,
                 email: existingUser.email,
             },
             process.env.JWT_KEY!
@@ -43,7 +44,7 @@ router.post(
             jwt: userJwt,
         };
 
-        res.status(200).send(existingUser);
+        res.status(200).send({ existingUser, userJwt });
     }
 );
 
