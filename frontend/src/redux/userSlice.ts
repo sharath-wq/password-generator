@@ -27,12 +27,12 @@ const userSlice = createSlice({
     name: 'user',
     initialState: initialState !== null ? initialState : null,
     reducers: {
-        setUser: (state, action) => {
+        setUser: (_, action) => {
             const newState = action.payload;
             saveState(newState);
             return newState;
         },
-        clearUser: (state) => {
+        clearUser: (_) => {
             saveState(null);
             return null;
         },

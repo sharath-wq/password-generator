@@ -22,6 +22,6 @@ const options: Option[] = [
     },
 ];
 
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = `${process.env.BACKEND_URL}/api`;
 
 export { options, BASE_URL };

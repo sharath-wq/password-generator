@@ -3,8 +3,6 @@ import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '@/components/ui/checkbox';
 import { options } from '@/constants';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-
 interface OptionsProps {
     checkboxStates: {
         [key: string]: boolean;
