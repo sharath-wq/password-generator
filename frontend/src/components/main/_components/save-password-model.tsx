@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { DialogContent } from '@/components/ui/dialog';
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -32,6 +32,8 @@ const SavePasswordModel = ({ password }: SavePasswordModelProps) => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
+            axios.defaults.withCredentials = true;
+
             await axios.post(`${BASE_URL}/password/save`, values);
 
             toast({
@@ -50,10 +52,15 @@ const SavePasswordModel = ({ password }: SavePasswordModelProps) => {
         form.setValue('password', password);
     }, [password]);
 
-    const { isSubmitting, isValid } = form.formState;
+    const { isSubmitting } = form.formState;
 
     return (
-        <DialogContent className='flex justify-center w-full '>
+        <DialogContent className='sm:max-w-[425px]'>
+            <DialogHeader>
+                <DialogTitle>Save Password</DialogTitle>
+                <DialogDescription>Add name to your password. Click save when you're done.</DialogDescription>
+            </DialogHeader>
+
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                     <FormField
@@ -82,7 +89,7 @@ const SavePasswordModel = ({ password }: SavePasswordModelProps) => {
                             </FormItem>
                         )}
                     />
-                    <Button disabled={!isValid || isSubmitting} type='submit'>
+                    <Button disabled={isSubmitting} type='submit'>
                         Submit
                     </Button>
                 </form>

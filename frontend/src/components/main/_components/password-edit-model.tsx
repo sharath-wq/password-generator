@@ -60,7 +60,7 @@ const PasswordEditModel = ({ id, name, password }: PasswordEditModelProps) => {
         <Dialog>
             <DialogTrigger asChild>
                 <Button variant='ghost' size={'sm'} className='w-full'>
-                    Edit Profile
+                    Edit
                 </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-[425px]'>

@@ -7,17 +7,20 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut } from 'lucide-react';
+import { ArrowLeft, LogOut } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle';
 import { BASE_URL } from '@/constants';
 import { toast } from '../ui/use-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '@/redux/userSlice';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '../ui/button';
 
 const Navbar = () => {
     const dispatch = useDispatch();
+
+    const { pathname } = useLocation();
 
     const user = useSelector((state: any) => state.user);
     const handleLogOut = async () => {
@@ -39,7 +42,15 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-end p-4 border-b shadow-2xl gap-3'>
+        <div className='flex justify-end p-4 border-b shadow-2xl gap-3 '>
+            {pathname !== '/' && (
+                <Link to={'/'}>
+                    <Button className='absolute top-5 left-5' variant={'link'} size={'sm'}>
+                        <ArrowLeft />
+                    </Button>
+                </Link>
+            )}
+
             <ModeToggle />
 
             <DropdownMenu>
