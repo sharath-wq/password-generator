@@ -24,6 +24,6 @@ const options: Option[] = [
     },
 ];
 
-const BASE_URL = `${BACKEND_URL || process.env.BACKEND_URL}/api`;
+const BASE_URL = `${BACKEND_URL}/api`;
 
 export { options, BASE_URL };
