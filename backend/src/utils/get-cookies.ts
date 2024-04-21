@@ -1,23 +1,19 @@
-import request from 'supertest';
-import { app } from '../app';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
-const getCookies = async () => {
-    const email = 'test@test.com';
-    const displayName = 'testUser';
-    const password = 'password';
+const getCookies = () => {
+    const payload = {
+        id: new mongoose.Types.ObjectId().toHexString(),
+        email: 'test@test.com',
+    };
+    const token = jwt.sign(payload, process.env.JWT_KEY!);
 
-    const response = await request(app)
-        .post('/api/users/signup')
-        .send({
-            email,
-            displayName,
-            password,
-        })
-        .expect(201);
+    const session = { jwt: token };
 
-    const cookie = response.get('Set-Cookie');
+    const sessionJSON = JSON.stringify(session);
+    const base64 = Buffer.from(sessionJSON).toString('base64');
 
-    return cookie;
+    return [`session=${base64}`];
 };
 
 export { getCookies };

@@ -10,6 +10,10 @@ import { signoutRouter } from './routes/auth/sign-out';
 import { signupRouter } from './routes/auth/sign-up';
 import { NotFoundError } from './errors/not-found-error';
 import { errorHandler } from './middleware/error-handler';
+import { savePasswordRotuer } from './routes/password/save-password';
+import { getPasswordsRouter } from './routes/password/get-passwords';
+import { updatePasswordRouter } from './routes/password/update-password';
+import { deletePasswordRouter } from './routes/password/delete-password';
 
 const app = express();
 app.set('trust proxy', true);
@@ -26,11 +30,17 @@ app.use(
         secure: false,
     })
 );
-
+// auth routes
 app.use(currentuserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+
+// password routes
+app.use(savePasswordRotuer);
+app.use(getPasswordsRouter);
+app.use(updatePasswordRouter);
+app.use(deletePasswordRouter);
 
 app.all('*', async () => {
     throw new NotFoundError();
