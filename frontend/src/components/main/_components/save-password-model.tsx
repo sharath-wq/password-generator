@@ -33,7 +33,6 @@ const SavePasswordModel = ({ password }: SavePasswordModelProps) => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             axios.defaults.withCredentials = true;
-
             await axios.post(`${BASE_URL}/password/save`, values);
 
             toast({
