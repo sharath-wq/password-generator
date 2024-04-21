@@ -15,7 +15,7 @@ const Input = ({ copyToClipboard, password, setPassword, handleGenerate }: Input
 
     return (
         <div className='w-full shadow-2xl'>
-            <div className='flex gap-3 justify-between rounded-t-xl bg-white h-20 items-center p-2'>
+            <div className='flex gap-3 justify-between rounded-t-xl bg-white h-20 items-center p-2 pl-8'>
                 <input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

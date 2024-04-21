@@ -38,10 +38,7 @@ const SignUp = () => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const response = await axios.post(`${BASE_URL}/users/signup`, values);
-
-            console.log(response);
-            // TODO: otp verification
+            await axios.post(`${BASE_URL}/users/signup`, values);
 
             toast({
                 description: 'Account created.',

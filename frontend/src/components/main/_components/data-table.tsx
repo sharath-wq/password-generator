@@ -13,7 +13,7 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { data } from './saved-passwords';
+import { Password } from './saved-passwords';
 import { columns } from './columns';
 
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-export default function DataTableDemo() {
+export default function DataTableDemo({ data }: { data: Password[] }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});

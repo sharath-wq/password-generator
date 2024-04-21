@@ -3,11 +3,9 @@ import Heading from './heading';
 import Input from './input';
 import Options from './options';
 
-import { Button } from '@/components/ui/button';
 import { generateRandomPassword } from '@/lib/generte-password';
 import { toast } from '@/components/ui/use-toast';
 import AuthModel from '../models/auth-model';
-import { useSelector } from 'react-redux';
 
 const Main = () => {
     const [length, setLength] = useState<number>(12);
@@ -17,8 +15,7 @@ const Main = () => {
         number: true,
         symbols: true,
     });
-    const [password, setPassword] = useState(generateRandomPassword(12, true, true, true, true));
-    const user = useSelector((state: any) => state.user);
+    const [password, setPassword] = useState('');
 
     const handleLengthChange = (newLength: number) => {
         setLength(newLength);
@@ -98,7 +95,7 @@ const Main = () => {
                 />
 
                 {/* Button */}
-                {user ? <Button className='w-full rounded-full'>Save password</Button> : <AuthModel />}
+                <AuthModel password={password} />
             </div>
         </div>
     );

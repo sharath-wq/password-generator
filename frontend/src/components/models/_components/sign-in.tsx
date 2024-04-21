@@ -32,6 +32,8 @@ const SignIn = () => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
+            axios.defaults.withCredentials = true;
+
             const { data } = await axios.post(`${BASE_URL}/users/signin`, values);
 
             dispatch(setUser(data));

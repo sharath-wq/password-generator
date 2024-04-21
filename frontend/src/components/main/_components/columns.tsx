@@ -12,6 +12,9 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Password } from './saved-passwords';
+import { toast } from '@/components/ui/use-toast';
+import PasswordEditModel from './password-edit-model';
+import PasswordDeleteModel from './password-delete-model';
 
 export const columns: ColumnDef<Password>[] = [
     {
@@ -78,10 +81,22 @@ export const columns: ColumnDef<Password>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>Copy</DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                navigator.clipboard.writeText(payment.password);
+                                toast({
+                                    description: 'Copied to clipboard!',
+                                });
+                            }}
+                            asChild
+                        >
+                            <Button variant='ghost' size={'sm'} className='w-full'>
+                                Copy
+                            </Button>
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem className='text-red-500'>Delete</DropdownMenuItem>
+                        <PasswordEditModel {...payment} />
+                        <PasswordDeleteModel {...payment} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );

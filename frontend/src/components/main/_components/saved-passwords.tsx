@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
 import DataTableDemo from './data-table';
+import axios from 'axios';
+import { BASE_URL } from '@/constants';
+import { toast } from '@/components/ui/use-toast';
 
 export type Password = {
     id: string;
@@ -62,10 +66,30 @@ const data: Password[] = [
 export { data };
 
 const SavedPasswords = () => {
+    const [data, setData] = useState<Password[]>([]);
+
+    const fetchPasswords = async () => {
+        try {
+            axios.defaults.withCredentials = true;
+            const { data } = await axios.get(`${BASE_URL}/password/passwords`);
+            setData(data);
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'Uh oh! Something went wrong.',
+                description: 'There was a problem with your request.' + error,
+            });
+        }
+    };
+
+    useEffect(() => {
+        fetchPasswords();
+    }, []);
+
     return (
         <div className='w-full h-full flex justify-center items-center bg-secondary'>
             <div className='sm:w-[60%] w-[100%] h-full flex flex-col items-center justify-center gap-5 '>
-                <DataTableDemo />
+                <DataTableDemo data={data} />
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
 import express from 'express';
 import { currentUser } from '../../middleware/current-user';
 import { Password } from '../../model/password';
-import { NotAuthorizedError } from '../../errors/not-authorized-error';
 import { requireAuth } from '../../middleware/require-auth';
 
 const router = express.Router();
