@@ -1,11 +1,14 @@
-FROM --platform=linux/amd64  node:alpine
+FROM --platform=linux/amd64 node:alpine
 
 WORKDIR /app
 
 COPY package.json .
 
-RUN npm install --only=prod
+RUN npm install
 
 COPY . .
+
+RUN npm run build
+
 
 CMD [ "npm", "start" ]
