@@ -15,14 +15,14 @@ const Input = ({ copyToClipboard, password, setPassword, handleGenerate }: Input
 
     return (
         <div className='w-full shadow-2xl'>
-            <div className='flex gap-3 justify-between rounded-t-xl bg-white h-20 items-center p-2 pl-8'>
+            <div className='grid grid-cols-2 w-full gap-3 justify-between rounded-t-xl bg-white h-20 items-center p-2 pl-8'>
                 <input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     type='text'
-                    className='flex-1 outline-none text-xl sm:text-2xl font-bold dark:text-black'
+                    className='col-span-1 place-content-start outline-none text-xl sm:text-2xl font-bold dark:text-black'
                 />
-                <div className='flex'>
+                <div className='flex col-span-1  place-content-end'>
                     <Button
                         onClick={copyToClipboard}
                         size={'icon'}
