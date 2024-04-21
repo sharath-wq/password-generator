@@ -1,3 +1,5 @@
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface Option {
     label: string;
     value: string;
@@ -22,6 +24,6 @@ const options: Option[] = [
     },
 ];
 
-const BASE_URL = `${process.env.BACKEND_URL}/api`;
+const BASE_URL = `${BACKEND_URL}/api`;
 
 export { options, BASE_URL };

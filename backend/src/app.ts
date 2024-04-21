@@ -20,7 +20,7 @@ app.set('trust proxy', true);
 app.use(json());
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: true,
         credentials: true,
     })
 );
