@@ -28,8 +28,6 @@ router.post(
             throw new BadRequestError('Name already exists');
         }
 
-        console.log(name, password, req.currentUser);
-
         const newPassword = await Password.create({
             userId: req.currentUser!.id,
             name,
