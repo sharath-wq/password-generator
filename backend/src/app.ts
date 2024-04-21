@@ -24,12 +24,14 @@ app.use(
         credentials: true,
     })
 );
+
 app.use(
     cookieSession({
         signed: false,
-        secure: false,
+        secure: process.env.NODE_ENV !== 'test',
     })
 );
+
 // auth routes
 app.use(currentuserRouter);
 app.use(signinRouter);
