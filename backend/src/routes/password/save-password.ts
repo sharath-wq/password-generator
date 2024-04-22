@@ -22,7 +22,7 @@ router.post(
     async (req: Request, res: Response) => {
         const { name, password } = req.body;
 
-        const existingName = await Password.findOne({ name: name });
+        const existingName = await Password.findOne({ name: name, userId: req.currentUser!.id });
 
         if (existingName) {
             throw new BadRequestError('Name already exists');

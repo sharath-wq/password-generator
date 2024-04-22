@@ -15,8 +15,8 @@ import { BASE_URL } from '@/constants';
 import { toast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
-    name: z.string().min(2).max(20),
-    password: z.string().min(8),
+    name: z.string().trim().min(2).max(20),
+    password: z.string().trim().min(8),
 });
 
 interface PasswordEditModelProps {
